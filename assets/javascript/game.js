@@ -1,5 +1,7 @@
-var wordsList = ["colombia", "venezuela", "peru", "ecuador", "brazil", "chile", "argentina","uruguay", "bolivia", "paraguay"];
-var chosenWord = "";
+
+
+var wordsList = ["colombia", "venezuela", "peru", "ecuador", "brazil", "chile", "argentina", "uruguay", "bolivia", "paraguay"];
+var chosenWord;
 var lettersInChosenWord = [];
 var numBlanks = 0;
 var blanksAndSuccesses = [];
@@ -36,7 +38,7 @@ function startGame() {
 
 function checkLetters(letter) {
 
- 
+
   var letterInWord = false;
 
   for (var i = 0; i < numBlanks; i++) {
@@ -46,7 +48,7 @@ function checkLetters(letter) {
     }
   }
 
-  
+
   if (letterInWord) {
 
     for (var j = 0; j < numBlanks; j++) {
@@ -68,7 +70,7 @@ function checkLetters(letter) {
 function roundComplete() {
 
 
-  
+
   document.getElementById("guesses-left").innerHTML = numGuesses;
   document.getElementById("word-blanks").innerHTML = blanksAndSuccesses.join(" ");
   document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
@@ -76,7 +78,7 @@ function roundComplete() {
   if (lettersInChosenWord.toString() === blanksAndSuccesses.toString()) {
 
     winCounter++;
-    alert("You win!");
+    alert("You win!" + " the correct word was: " + chosenWord.toUpperCase());
     document.getElementById("win-counter").innerHTML = winCounter;
     startGame();
   }
@@ -84,7 +86,7 @@ function roundComplete() {
   else if (numGuesses === 0) {
 
     lossCounter++;
-    alert("You lose");
+    alert("You lose! The correct word was: " + chosenWord.toUpperCase());
     document.getElementById("loss-counter").innerHTML = lossCounter;
 
     startGame();
@@ -95,8 +97,10 @@ function roundComplete() {
 
 startGame();
 
-document.onkeyup = function(event) {
+document.onkeyup = function (event) {
   letterGuessed = String.fromCharCode(event.which).toLowerCase();
   checkLetters(letterGuessed);
   roundComplete();
 };
+
+
